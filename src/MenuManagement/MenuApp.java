@@ -1,5 +1,4 @@
-
-package javaapplication35;
+package menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,21 +30,21 @@ public class MenuApp extends JFrame {
         JLabel priceLabel = new JLabel("Item Price:");
         priceField = new JTextField();
 
-        topPanel.add(nameLabel);//Thêm ô nhập liệu nameLabel vào topPanel
-        topPanel.add(nameField);//Thêm ô nhập liệu nameField vào topPanel
-        topPanel.add(priceLabel);//Thêm ô nhập liệu priceLabel vào topPanel
-        topPanel.add(priceField);//Thêm ô nhập liệu priceField vào topPanel
+        topPanel.add(nameLabel);
+        topPanel.add(nameField);
+        topPanel.add(priceLabel);
+        topPanel.add(priceField);
 
         add(topPanel, BorderLayout.NORTH);
 
         // Khu vực hiển thị menu
         JPanel centerPanel = new JPanel(new BorderLayout());
-        centerPanel.setBorder(BorderFactory.createTitledBorder("Menu Items"));//Một khung (border) có tiêu đề "Menu Items" được thêm vào centerPanel để làm rõ mục đích hiển thị danh sách menu.
+        centerPanel.setBorder(BorderFactory.createTitledBorder("Menu Items"));
         menuDisplayArea = new JTextArea();
         menuDisplayArea.setEditable(false);
-        menuDisplayArea.setFont(new Font("Monospaced", Font.PLAIN, 12));//setFont thiết lập phông chữ dạng Monospaced, giúp các dòng hiển thị dễ đọc và nhất quán.
-        centerPanel.add(new JScrollPane(menuDisplayArea), BorderLayout.CENTER);//JScrollPane bao bọc menuDisplayArea để cung cấp thanh cuộn nếu danh sách menu dài hơn không gian hiển thị.
-        add(centerPanel, BorderLayout.CENTER);//Thành phần này được đặt ở vị trí trung tâm
+        menuDisplayArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        centerPanel.add(new JScrollPane(menuDisplayArea), BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
 
         // Panel dưới cùng chứa các nút
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
@@ -79,28 +78,18 @@ public class MenuApp extends JFrame {
         String name = nameField.getText(); // Lấy tên món ăn
         String priceText = priceField.getText(); // Lấy giá món ăn
 
-        try {
-            if (name.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Item name cannot be empty!", "Input Error", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+      
+        double price = Double.parseDouble(priceText); // Nếu nhập chữ, chương trình sẽ crash
 
-            double price = Double.parseDouble(priceText); // Chuyển giá sang kiểu số
-            if (price < 0) {
-                JOptionPane.showMessageDialog(this, "Price cannot be negative!", "Input Error", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+        
 
-            MenuItem item = new MenuItem(name, price); // Tạo đối tượng món ăn
-            menuItems.add(item); // Thêm vào danh sách
+        MenuItem item = new MenuItem(name, price); // Tạo đối tượng món ăn
+        menuItems.add(item); // Thêm vào danh sách
 
-            nameField.setText(""); // Xóa ô nhập
-            priceField.setText("");
+        nameField.setText(""); // Xóa ô nhập
+        priceField.setText("");
 
-            updateMenuDisplay(); // Cập nhật hiển thị menu
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid price! Please enter a numeric value.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        }
+        
     }
 
     private void updateMenuDisplay() {
@@ -121,4 +110,3 @@ public class MenuApp extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MenuApp()); // Chạy ứng dụng
     }
-}
