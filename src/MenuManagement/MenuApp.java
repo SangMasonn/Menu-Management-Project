@@ -1,4 +1,5 @@
-package MenuManagement;
+
+package javaapplication35;
 
 import javax.swing.*;
 import java.awt.*;
