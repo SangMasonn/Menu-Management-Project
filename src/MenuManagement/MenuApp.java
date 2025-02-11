@@ -110,3 +110,4 @@ public class MenuApp extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new MenuApp()); // Chạy ứng dụng
     }
+}
